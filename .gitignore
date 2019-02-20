@@ -1,2 +1,3 @@
-#Don't want anyone to get my local session cookies
+#Don't want anyone to get my local session cookies or files
 *cookie
+temp_images/
