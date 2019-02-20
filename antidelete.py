@@ -13,15 +13,18 @@ if not os.path.isdir(imagedir):
 
 class archiveBot(Client):
     def onMessage(self,mid,author_id,message_object,thread_id,thread_type,ts,**kwargs):
-        if int(thread_id)==targetThread:
+        if int(thread_id)==targetThread and author_id!=self.uid:
             mid=mid[5:]
             sentMessages[mid]=message_object.text
             recent.append(mid)
             print("Added MID '{}' and text '{}' to dictionary".format(mid,message_object.text))
             pos=0
+            print('length is '+str(len(message_object.attachments)))
             for sentFile in message_object.attachments:
                 if isinstance(sentFile,ImageAttachment):
                     fileprefix=imagedir+mid+'_'
+                    time.sleep(0.2)
+                    print(self.fetchImageUrl(sentFile.uid))
                     img_data=requests.get(self.fetchImageUrl(sentFile.uid)).content
                     with open(fileprefix+str(pos)+'.jpg','wb') as handler:
                         handler.write(img_data)
