@@ -1,3 +1,3 @@
-#Don't want anyone to get my local session cookies or files
-*cookie
+cookie*
 temp_images/
+config.json
